@@ -10,16 +10,33 @@
   justify-content: center;
   align-items: center;
   margin: 2px;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .cell-correct {
   background-color: green;
+  transform: scale(1.1);
 }
 
 .cell-wrong {
   background-color: red;
+  transform: scale(1.1);
 }
 
 .cell-wrongPosition {
-  background-color: yellow;
+  background-color: rgb(205, 205, 10);
+  transform: scale(1.1);
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cell.spin {
+  animation: spin 0.6s ease-in-out;
 }

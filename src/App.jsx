@@ -5,7 +5,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <h1>Counter</h1>
+      <h1>Wordle Clone</h1>
       <Board />
     </>
   );
