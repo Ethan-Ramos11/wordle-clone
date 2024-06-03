@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.tile {
+.cell {
   width: 50px;
   height: 50px;
   border: 1px solid #ccc;
@@ -10,4 +10,16 @@
   justify-content: center;
   align-items: center;
   margin: 2px;
+}
+
+.cell-correct {
+  background-color: green;
+}
+
+.cell-wrong {
+  background-color: red;
+}
+
+.cell-wrongPosition {
+  background-color: yellow;
 }
