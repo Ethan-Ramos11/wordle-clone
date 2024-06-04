@@ -66,3 +66,19 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.reset-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #f04f47;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+  background-color: #c03c34;
+}

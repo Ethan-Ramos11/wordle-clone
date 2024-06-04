@@ -1,9 +1,15 @@
 import React from "react";
 import "../styles.css";
+import ResetButton from "./reset";
 import { useState, useEffect, useCallback } from "react";
 import { useEnterKey, useBackspaceKey, useKeyPress } from "../keyboardHooks";
-const word = ["C", "O", "D", "E", "R"];
+
+const wordLst = ["CODER", "ASCII", "REACT", "CACHE", "STACK", "QUEUE", "GRAPH"];
+
 const Board = () => {
+  const [word, setWord] = useState(() =>
+    wordLst[Math.floor(Math.random() * wordLst.length)].split("")
+  );
   const [attempts, setAttempts] = useState(() =>
     Array(6)
       .fill(null)
@@ -14,34 +20,40 @@ const Board = () => {
   const [gameOver, setGameOver] = useState(false);
   const [isWinner, setIsWinner] = useState(false);
   const [animateSpin, setAnimateSpin] = useState(false);
+
+  const resetGame = () => {
+    setWord(wordLst[Math.floor(Math.random() * wordLst.length)].split(""));
+    setAttempts(
+      Array(6)
+        .fill(null)
+        .map(() => Array(5).fill({ letter: "", status: "empty" }))
+    );
+    setCurrentRow(0);
+    setCurrentCell(0);
+    setGameOver(false);
+    setIsWinner(false);
+    setAnimateSpin(false);
+  };
   const checkGameOver = useCallback(() => {
-    const victory = attempts[currentRow].every(
+    if (currentRow === 0) return false;
+    const victory = attempts[currentRow - 1].every(
       (cell) => cell.status === "correct"
     );
-    const defeat = currentRow === 5;
-
-    if (victory) {
-      setIsWinner(true);
-      console.log("victory");
+    const defeat = currentRow - 1 === 5;
+    if (victory || defeat) {
+      setIsWinner(victory);
+      setGameOver(true);
       return true;
-    } else if (defeat) {
-      console.log("defeat");
-      setIsWinner(false);
-      return true;
-    } else {
-      console.log("else");
-      return false;
-    }
+    } else return false;
   }, [currentRow, attempts]);
+  useEffect(() => {
+    checkGameOver();
+  }, [currentRow, attempts, checkGameOver]);
   const handleEnter = useEnterKey(
     word,
-    setCurrentCell,
     currentRow,
     attempts,
     setAttempts,
-    checkGameOver,
-    setGameOver,
-    setCurrentRow,
     setAnimateSpin
   );
   const handleBackspace = useBackspaceKey(
@@ -60,21 +72,24 @@ const Board = () => {
   );
   const handleKeyDown = useCallback(
     (event) => {
-      console.log(currentRow);
-      if (gameOver) {
-        console.log("game over in handle key down");
+      if (checkGameOver()) {
         return;
       }
-      if (event.key === "Enter" && currentCell === 5) handleEnter();
-      else if (event.key === "Backspace") handleBackspace();
+      if (event.key === "Enter" && currentCell === 5) {
+        handleEnter();
+        if (checkGameOver()) return;
+        setCurrentRow(currentRow + 1);
+        setCurrentCell(0);
+      } else if (event.key === "Backspace") handleBackspace();
       else handleKeyPress(event.key);
     },
     [
-      gameOver,
       handleEnter,
       handleBackspace,
       handleKeyPress,
       currentCell,
+      checkGameOver,
+      setCurrentRow,
       currentRow,
     ]
   );
@@ -106,6 +121,7 @@ const Board = () => {
           {isWinner ? "Congratulations!" : "Try Again!"}
         </div>
       )}
+      <ResetButton onReset={resetGame} />
     </div>
   );
 };

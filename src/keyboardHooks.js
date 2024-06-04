@@ -2,13 +2,9 @@ import { useCallback } from "react";
 
 export const useEnterKey = (
   word,
-  setCurrentCell,
   currentRow,
   attempts,
   setAttempts,
-  checkGameOver,
-  setGameOver,
-  setCurrentRow,
   setAnimateSpin
 ) => {
   return useCallback(() => {
@@ -30,25 +26,7 @@ export const useEnterKey = (
     );
 
     setAttempts(updatedAttempts);
-    if (checkGameOver(updatedAttempts[currentRow])) {
-      setGameOver(true);
-      console.log("game over");
-    } else {
-      setCurrentRow(currentRow + 1);
-      setCurrentCell(0);
-      console.log("next row");
-    }
-  }, [
-    word,
-    setCurrentCell,
-    currentRow,
-    attempts,
-    setAttempts,
-    checkGameOver,
-    setGameOver,
-    setCurrentRow,
-    setAnimateSpin,
-  ]);
+  }, [word, attempts, setAttempts, currentRow, setAnimateSpin]);
 };
 
 export const useBackspaceKey = (
