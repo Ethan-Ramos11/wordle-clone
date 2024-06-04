@@ -102,6 +102,11 @@ const Board = () => {
   }, [handleKeyDown]);
   return (
     <div>
+      {gameOver && (
+        <div className="game-over">
+          {isWinner ? "Congratulations!" : "Try Again!"}
+        </div>
+      )}
       {attempts.map((row, rowIndex) => (
         <div key={rowIndex} className="row">
           {row.map((cell, cellIndex) => (
