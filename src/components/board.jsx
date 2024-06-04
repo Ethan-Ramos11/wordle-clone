@@ -22,11 +22,14 @@ const Board = () => {
 
     if (victory) {
       setIsWinner(true);
+      console.log("victory");
       return true;
     } else if (defeat) {
+      console.log("defeat");
       setIsWinner(false);
       return true;
     } else {
+      console.log("else");
       return false;
     }
   }, [currentRow, attempts]);
@@ -36,7 +39,6 @@ const Board = () => {
     attempts,
     setAttempts,
     checkGameOver,
-    setAttempts,
     setGameOver,
     setCurrentRow,
     setAnimateSpin
@@ -57,12 +59,23 @@ const Board = () => {
   );
   const handleKeyDown = useCallback(
     (event) => {
-      if (gameOver) return;
-      if (event.key === "Enter") handleEnter();
+      console.log(currentRow);
+      if (gameOver) {
+        console.log("game over in handle key down");
+        return;
+      }
+      if (event.key === "Enter" && currentCell === 5) handleEnter();
       else if (event.key === "Backspace") handleBackspace();
       else handleKeyPress(event.key);
     },
-    [gameOver, handleEnter, handleBackspace, handleKeyPress]
+    [
+      gameOver,
+      handleEnter,
+      handleBackspace,
+      handleKeyPress,
+      currentCell,
+      currentRow,
+    ]
   );
 
   useEffect(() => {

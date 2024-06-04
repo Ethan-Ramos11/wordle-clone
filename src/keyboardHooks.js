@@ -32,17 +32,20 @@ export const useEnterKey = (
 
     if (checkGameOver(updatedAttempts[currentRow])) {
       setGameOver(true);
+      console.log("game over");
     } else {
-      setCurrentRow((row) => row + 1);
+      setCurrentRow(currentRow + 1);
+      console.log("next row");
     }
   }, [
     word,
     currentRow,
     attempts,
+    setAttempts,
     checkGameOver,
     setGameOver,
     setCurrentRow,
-    setAnimateSpin,
+    setAnimateSpin
   ]);
 };
 
@@ -55,7 +58,6 @@ export const useBackspaceKey = (
 ) => {
   return useCallback(() => {
     if (currentCell > 0) {
-      // Create a deep copy of the attempts to mutate
       const updatedAttempts = attempts.map((row, idx) =>
         idx === currentRow
           ? row.map((cell, cellIdx) =>
