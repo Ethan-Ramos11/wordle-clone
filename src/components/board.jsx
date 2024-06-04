@@ -35,6 +35,7 @@ const Board = () => {
   }, [currentRow, attempts]);
   const handleEnter = useEnterKey(
     word,
+    setCurrentCell,
     currentRow,
     attempts,
     setAttempts,
