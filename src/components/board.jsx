@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles.css";
 import ResetButton from "./reset";
 import { useState, useEffect, useCallback } from "react";
@@ -131,3 +130,8 @@ const Board = () => {
   );
 };
 export default Board;
+
+
+
+
+
