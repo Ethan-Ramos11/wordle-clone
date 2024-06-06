@@ -1,7 +1,10 @@
 import "../styles.css";
-const ResetButton = ({ onReset }) => {
+const ResetButton = ({ onReset, result }) => {
   return (
-    <button className="reset-button" onClick={onReset}>
+    <button
+      className={`reset-button ${!result ? "reset-button" : ""}`}
+      onClick={onReset}
+    >
       Reset Game
     </button>
   );

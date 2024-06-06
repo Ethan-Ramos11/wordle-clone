@@ -102,7 +102,7 @@ const Board = () => {
   return (
     <div>
       {gameOver && (
-        <div className="game-over">
+        <div className={`game-over game-over-${isWinner ? "won" : "lost"}`}>
           {isWinner ? "Congratulations!" : "Try Again!"}
         </div>
       )}
@@ -120,18 +120,13 @@ const Board = () => {
           ))}
         </div>
       ))}
-      {gameOver && (
-        <div className="game-over">
-          {isWinner ? "Congratulations!" : "Try Again!"}
+      {gameOver && !isWinner && (
+        <div className="word">
+          <p>The word was: {word}</p>
         </div>
       )}
-      <ResetButton onReset={resetGame} />
+      <ResetButton onReset={resetGame} result={isWinner} />
     </div>
   );
 };
 export default Board;
-
-
-
-
-
