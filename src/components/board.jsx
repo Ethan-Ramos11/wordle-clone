@@ -100,33 +100,36 @@ const Board = () => {
     };
   }, [handleKeyDown]);
   return (
-    <div>
-      {gameOver && (
-        <div className={`game-over game-over-${isWinner ? "won" : "lost"}`}>
-          {isWinner ? "Congratulations!" : "Try Again!"}
-        </div>
-      )}
-      {attempts.map((row, rowIndex) => (
-        <div key={rowIndex} className="row">
-          {row.map((cell, cellIndex) => (
-            <div
-              key={cellIndex}
-              className={`cell cell-${cell.status} ${
-                animateSpin && rowIndex === currentRow - 1 ? "spin" : ""
-              }`}
-            >
-              {cell.letter}
-            </div>
-          ))}
-        </div>
-      ))}
-      {gameOver && !isWinner && (
-        <div className="word">
-          <p>The word was: {word}</p>
-        </div>
-      )}
-      <ResetButton onReset={resetGame} result={isWinner} />
-    </div>
+    <>
+      <div>text to check continued deployment</div>
+      <div>
+        {gameOver && (
+          <div className={`game-over game-over-${isWinner ? "won" : "lost"}`}>
+            {isWinner ? "Congratulations!" : "Try Again!"}
+          </div>
+        )}
+        {attempts.map((row, rowIndex) => (
+          <div key={rowIndex} className="row">
+            {row.map((cell, cellIndex) => (
+              <div
+                key={cellIndex}
+                className={`cell cell-${cell.status} ${
+                  animateSpin && rowIndex === currentRow - 1 ? "spin" : ""
+                }`}
+              >
+                {cell.letter}
+              </div>
+            ))}
+          </div>
+        ))}
+        {gameOver && !isWinner && (
+          <div className="word">
+            <p>The word was: {word}</p>
+          </div>
+        )}
+        <ResetButton onReset={resetGame} result={isWinner} />
+      </div>
+    </>
   );
 };
 export default Board;
