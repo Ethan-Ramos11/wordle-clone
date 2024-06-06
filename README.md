@@ -12,7 +12,7 @@ This project is a simple clone of the popular word game Wordle, built with React
 - React.js
 - Vite as the build tool
 
-## Live demo
+## Live demo - underconstruction
 
 https://ethan-ramos11.github.io/wordle-clone/
 
