@@ -101,7 +101,6 @@ const Board = () => {
   }, [handleKeyDown]);
   return (
     <>
-      <div>text to check continued deployment</div>
       <div>
         {gameOver && (
           <div className={`game-over game-over-${isWinner ? "won" : "lost"}`}>
